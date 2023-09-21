@@ -14,19 +14,25 @@ class TextSizeAdapter(private val context: Context, private val textSizes: Array
     override fun getItemId(position: Int) = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        return (getDropDownView(position, convertView, parent) as TextView).apply {
+            textSize = 22f
+        }
+    }
+
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val textView:TextView
 
         if(convertView!=null){
             textView = convertView as TextView
         } else {
             textView = TextView(context)
+            textView.setPadding(5,10,0,10)
         }
 
         textView.text = textSizes[position].toString()
         textView.textSize = textSizes[position].toFloat()
 
-        textView.setPadding(5,10,0,10)
+
         return textView
     }
-
 }
